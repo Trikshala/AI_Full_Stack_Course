@@ -1,16 +1,16 @@
-import ollama
+from ollama import chat
 
 system_msg = "You are a friendly, patient tutor. Keep answers short and simple."
 history = [{"role": "system", "content": system_msg}]
 question_count = 0
 
 while True:
-    question = input("You (Ask something): ").strip()
+    question = input("You (Ask something): ")
     if question == "":
         print("AI 🤖 : Please type something.")
         continue
     if question.lower().strip() == "exit":
-        print("AI 🤖 : Goodbye Trikshala! Come back soon!🤧🤧")
+        print("AI 🤖 : Goodbye User! Come back soon!🤧🤧")
         print(f"AI 🤖 : You asked {question_count} question(s) today. Nice work!")
         break
     if question.lower().strip() == "/clear":
@@ -43,7 +43,7 @@ while True:
     history.append({"role": "user", "content": question})
     question_count += 1
     try:
-        response = ollama.chat(
+        response = chat(
             model="llama3.2",
             messages=history
         )
